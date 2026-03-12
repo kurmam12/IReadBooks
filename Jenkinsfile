@@ -11,14 +11,14 @@ pipeline {
             steps {
                 echo 'Building with Maven...'
                 // 'sh' for Linux/macOS, use 'bat' if your agent is Windows
-             
+             sh "mvn install"
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
-                sh 'mvn test'
+                
             }
         }
 
@@ -31,3 +31,4 @@ pipeline {
     }
 
 }
+
