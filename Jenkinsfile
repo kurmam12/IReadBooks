@@ -2,33 +2,37 @@ pipeline {
     agent any
     
     tools {
-        // This pulls the Maven installation configured in Jenkins Global Tool Configuration
         maven 'Maven' 
     }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building with Maven...'
-                // 'sh' for Linux/macOS, use 'bat' if your agent is Windows
-             sh "mvn install"
+                echo 'Compiling and Packaging...'
+                sh 'mvn clean package -DskipTests'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
-                
+                sh 'mvn test'
+            }
+        }
+
+        stage('Install') {
+            steps {
+                echo 'Installing artifact to local .m2 repository...'
+                // This ensures the JAR is available for other projects on this agent
+                sh 'mvn install -DskipTests' 
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying Artifact...'
-              
+                echo 'Archiving Artifact...'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
     }
-
 }
-
