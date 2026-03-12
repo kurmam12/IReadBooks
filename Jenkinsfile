@@ -2,6 +2,7 @@ pipeline {
     agent any
     
     tools {
+        // Ensure 'Maven' matches the name in Global Tool Configuration exactly
         maven 'Maven' 
     }
 
@@ -9,22 +10,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Compiling and Packaging...'
-                sh 'mvn clean package -DskipTests'
+                // Changed 'sh' to 'bat' for Windows
+                bat 'mvn clean package -DskipTests'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Install') {
             steps {
                 echo 'Installing artifact to local .m2 repository...'
-                // This ensures the JAR is available for other projects on this agent
-                sh 'mvn install -DskipTests' 
+                bat 'mvn install -DskipTests' 
             }
         }
 
