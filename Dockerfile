@@ -1,15 +1,11 @@
-# Step 1: Use a lightweight JRE image
-FROM eclipse-temurin:17-jre-alpine
+# Stage 1: Build the application
+FROM maven:3.8.5-openjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Step 2: Set the working directory inside the container
-WORKDIR /app
-
-# Step 3: Copy your jar file into the container
-# We rename it to 'app.jar' for simplicity in the ENTRYPOINT
-COPY IReadBooks-0.0.1-SNAPSHOT.jar app.jar
-
-# Step 4: Expose the port your app runs on (usually 8080 for Spring Boot)
+# Stage 2: Run the application
+FROM openjdk:17-jdk-slim
+# The jar is created in the 'target' folder during Stage 1
+COPY --from=build /target/IReadBooks-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Step 5: Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
