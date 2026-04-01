@@ -4,7 +4,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application
-FROM openjdk:17-jdk-slim
+FROM FROM openjdk:17-oracle
 # The jar is created in the 'target' folder during Stage 1
 COPY --from=build /target/IReadBooks-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
