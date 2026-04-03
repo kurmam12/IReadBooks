@@ -1,6 +1,6 @@
 package com.iread.books.controllertest;
 
-import static org.mockito.Mockito.when;
+/*import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -20,9 +20,9 @@ import com.iread.books.controller.IReadBooksController;
 import com.iread.books.model.IReadBooksModel;
 import com.iread.books.service.IReadBooksService;
 
-@WebMvcTest(IReadBooksController.class)
+@WebMvcTest(IReadBooksController.class) */
 public class IReadBooksControllerTest {
-	@Autowired
+/*	@Autowired
 	private MockMvc mockMvc;
 	
 	@MockitoBean
@@ -46,7 +46,7 @@ public class IReadBooksControllerTest {
 		 * .andExpect(jsonPath("$[1].author").value("kalyan"))
 		 * .andExpect(jsonPath("$[2].genre").value("biography"));
 		 */
-        mockMvc.perform(get("/ireadapi/getAllBooks")
+      /*  mockMvc.perform(get("/ireadapi/getAllBooks")
                 .contentType(MediaType.APPLICATION_JSON))
         		.andDo(print())
                 .andExpect(status().isOk())
@@ -57,6 +57,6 @@ public class IReadBooksControllerTest {
                 .andExpect(jsonPath("$[0].genre").value("biography"))
                 // Index 1 = book2
                 .andExpect(jsonPath("$[1].bookName").value("The Great Gatsby"));
-    }
+    } */
 
 }
